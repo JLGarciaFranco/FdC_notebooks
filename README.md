@@ -1,5 +1,6 @@
 # 🌎 FdC_notebooks  
 _Notebooks de Física del Clima_
+JLGF --- Escuela Nacional de Ciencias de la Tierra
 
 Este repositorio reúne una colección de notebooks de **Física del Clima**, pensados como apoyo didáctico y material de consulta para el curso en la **Escuela Nacional de Ciencias de la Tierra (UNAM)**.  
 
