@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+
+% --- Configuración básica ---
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc} % si usas LuaLaTeX/XeLaTeX, puedes omitir inputenc
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\setlist{itemsep=2pt, topsep=4pt}
+
+\title{Guía breve para usar \texttt{FdC\_notebooks} en JupyterHub (MACTI, UNAM)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Esta guía asume que trabajas en JupyterHub de MACTI, que abre un contenedor Linux ya configurado con los paquetes necesarios para estos notebooks (no necesitas instalar nada adicional).
+
+\begin{enumerate}
+  \item \textbf{Inicia sesión en JupyterHub (MACTI)} y arranca tu servidor. Verás el explorador de archivos de tu contenedor.
+
+  \item \textbf{Abre una Terminal} desde JupyterHub:
+  \begin{quote}
+  Menú \texttt{New} \textrightarrow{} \texttt{Terminal}.
+  \end{quote}
+
+  \item \textbf{Clona el repositorio y entra a la carpeta}:
+\begin{verbatim}
+git clone https://github.com/JLGarciaFranco/FdC_notebooks/tree/main
+cd FdC_notebooks
+\end{verbatim}
+
+
+  \item \textbf{Abre los notebooks} desde el panel de JupyterHub: navega a \texttt{FdC\_notebooks/} y haz clic en el \texttt{.ipynb} que quieras (por ejemplo, \texttt{Insolacion.ipynb}, \texttt{Bolton\_approx.ipynb}, \texttt{CAPE.ipynb}).
+
+  \item \textbf{Ejecuta las celdas} normalmente:
+  \begin{itemize}
+    \item \texttt{Shift+Enter} para ejecutar una celda y avanzar.
+    \item Menú \texttt{Run} \textrightarrow{} \texttt{Run All Cells} para correr todo el notebook.
+  \end{itemize}
+
+  \item \textbf{Guarda tu trabajo} con el ícono \texttt{Save} o \texttt{Cmd/Ctrl+S}. (Los paquetes requeridos ya vienen instalados en el contenedor de MACTI; no necesitas pasos extra.)
+
+  \item \textbf{Actualizar los notebooks cuando el repositorio cambie} (\emph{pull}):
+  \begin{enumerate}[label*=\alph*)]
+    \item Cierra los notebooks abiertos y abre una Terminal dentro de \texttt{FdC\_notebooks/}.
+    \item Si \emph{no} has modificado archivos del repositorio:
+\begin{verbatim}
+git pull origin main
+\end{verbatim}
+    \item Si \emph{sí} hiciste cambios en archivos del repo, pueden surgir conflictos. Para evitarlos:
+      \begin{itemize}
+        \item Evita editar los notebooks “originales”. Trabaja en copias (ver paso 8).
+        \item Si ya editaste un archivo original y aparece un conflicto, respalda tu versión (por ejemplo, renómbralo con \texttt{\_miversion}) y luego ejecuta:
+\begin{verbatim}
+git restore --staged .
+git checkout -- .
+git pull origin main
+\end{verbatim}
+        \item Alternativamente, mueve tus cambios a tu carpeta de trabajo (paso 8) y luego haz \texttt{git pull}.
+      \end{itemize}
+    \item Tras el \texttt{pull}, recarga el navegador y abre de nuevo los notebooks.
+  \end{enumerate}
+
+  \item \textbf{Crea tus propios notebooks de trabajo} para no tener conflictos al actualizar:
+  \begin{enumerate}[label*=\alph*)]
+    \item Crea una carpeta, por ejemplo \texttt{mi\_trabajo/}, dentro de \texttt{FdC\_notebooks/}.
+    \item En el panel de JupyterHub: \texttt{New} \textrightarrow{} \texttt{Notebook} (\texttt{Python 3}).
+    \item Trabaja y guarda tus cambios sólo dentro de \texttt{mi\_trabajo/}. Así podrás hacer \texttt{git pull} sin sobrescribir tu trabajo.
+  \end{enumerate}
+\end{enumerate}
+
+\paragraph{Notas.}
+(1) Si \texttt{git pull} indica que no encuentra la rama \texttt{main}, verifica el nombre de la rama por defecto del repo (a veces es \texttt{master}). (2) Si prefieres traer un notebook específico sin mezclar todo, puedes descargarlo directamente desde GitHub y colocarlo en tu carpeta \texttt{mi\_trabajo/}.
+
+\end{document}
